@@ -3,17 +3,16 @@ import userModel from "./userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-
 const cookieOptions = {
-  httpOnly: true, 
-  secure: process.env.ENVIRONMENT !== "development", 
+  httpOnly: true,
+  secure: process.env.ENVIRONMENT !== "development",
   sameSite: "strict",
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
- // ===================================================================================
- //                                   REGISTER USER
- // ===================================================================================
+// ===================================================================================
+//                                   REGISTER USER
+// ===================================================================================
 
 const createUser = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -57,10 +56,9 @@ const createUser = async (req, res, next) => {
   }
 };
 
-
- // ===================================================================================
- //                                   LOGIN USER
- // ===================================================================================
+// ===================================================================================
+//                                   LOGIN USER
+// ===================================================================================
 
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
@@ -72,7 +70,9 @@ const loginUser = async (req, res, next) => {
   try {
     const user = await userModel.findOne({ email });
     if (!user) {
-      return next(createHttpError(400, "User not found. Please register first"));
+      return next(
+        createHttpError(400, "User not found. Please register first")
+      );
     }
 
     // Check if password matches
@@ -99,4 +99,37 @@ const loginUser = async (req, res, next) => {
   }
 };
 
-export { createUser, loginUser };
+// ===================================================================================
+//                                   LOGOUT USER
+// ===================================================================================
+
+const logoutUser = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return next(createHttpError(400, "Email is required"));
+    }
+
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return next(createHttpError(400, "User is not registered"));
+    }
+
+    // Clear the token cookie
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.ENVIRONMENT !== "development",
+      sameSite: "strict",
+    });
+
+    return res.status(200).json({
+      message: "User logged out successfully",
+    });
+  } catch (error) {
+    console.error("Logout error:", error);
+    return next(createHttpError(500, "Internal Server Error"));
+  }
+};
+
+export { createUser, loginUser, logoutUser };
