@@ -1,13 +1,12 @@
-
-import './App.css'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 function App() {
-
-
   return (
-    <>
-      <h1>Shahbaz with Xmate</h1>
-    </>
+    <div className="flex min-h-svh flex-col items-center justify-center bg-primary">
+      <Button>Click me</Button>
+      <Input />
+    </div>
   )
 }
 
