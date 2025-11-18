@@ -1,13 +1,5 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { AppRouter } from "../src/app/router/index";
 
-function App() {
-  return (
-    <div className="flex min-h-svh flex-col items-center justify-center bg-primary">
-      <Button>Click me</Button>
-      <Input />
-    </div>
-  )
+export default function App() {
+  return <AppRouter />;
 }
-
-export default App
