@@ -1,9 +1,13 @@
-export default function Footer() {
+
+
+function footer() {
   return (
-    <footer className="border-t py-4 mt-10 bg-background">
-      <div className="container mx-auto text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} MyApp. All rights reserved.
-      </div>
-    </footer>
-  );
+    <div>
+      <p className="pt-4 text-center text-sm pb-5 text-gray-400">
+                Copyright {new Date().getFullYear()} © <a href="https://xclassmate.com">XClassmate</a>. All Right Reserved.
+            </p>
+    </div>
+  )
 }
+
+export default footer

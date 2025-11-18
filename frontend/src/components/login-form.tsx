@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -43,22 +44,22 @@ export function LoginForm({
               <Field>
                 <div className="flex items-center">
                   <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <a
-                    href="#"
+                  < Link
+                    to="#"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
                     Forgot your password?
-                  </a>
+                  </ Link>
                 </div>
                 <Input id="password" type="password" required />
               </Field>
               <Field>
-                <Button type="submit">Login</Button>
-                <Button variant="outline" type="button">
+                <Button type="submit" className="bg-cyan-400 hover:bg-cyan-600 cursor-pointer">Login</Button>
+                <Button variant="outline" type="button" >
                   Login with Google
                 </Button>
-                <FieldDescription className="text-center">
-                  Don&apos;t have an account? <a href="/signup">Sign up</a>
+                <FieldDescription className="text-center ">
+                  Don&apos;t have an account? < Link to="/signup">Sign up</ Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
